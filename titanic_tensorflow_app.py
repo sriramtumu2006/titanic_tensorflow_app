@@ -44,6 +44,7 @@ st.markdown("""
     border-radius: 15px;
     text-align: center;
     border: 1px solid #10b981;
+    margin-top: 20px;
 }
 
 .result-danger {
@@ -52,6 +53,7 @@ st.markdown("""
     border-radius: 15px;
     text-align: center;
     border: 1px solid #ef4444;
+    margin-top: 20px;
 }
 
 .metric {
@@ -64,10 +66,15 @@ st.markdown("""
 
 .summary-box {
     background: rgba(255,255,255,0.08);
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
+    padding: 25px;
+    border-radius: 20px;
+    margin-top: 25px;
     border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+
+.summary-box h2 {
+    color: #38bdf8;
 }
 
 .stButton button {
@@ -149,7 +156,9 @@ with st.container():
         50.0
     )
 
-    predict_btn = st.button("Predict Survival")
+    predict_btn = st.button(
+        "Predict Survival"
+    )
 
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -168,7 +177,7 @@ if predict_btn:
         st.markdown(f"""
         <div class="result-success">
             <h1>✅ Survived</h1>
-            <h2>{probability:.1%} Chance</h2>
+            <h2>{probability:.1%} Chance of Survival</h2>
         </div>
         """, unsafe_allow_html=True)
 
@@ -184,6 +193,7 @@ if predict_btn:
     col1, col2 = st.columns(2)
 
     with col1:
+
         st.markdown(f"""
         <div class="metric">
             <h2>{probability:.1%}</h2>
@@ -192,6 +202,7 @@ if predict_btn:
         """, unsafe_allow_html=True)
 
     with col2:
+
         st.markdown(f"""
         <div class="metric">
             <h2>{1 - probability:.1%}</h2>
@@ -201,11 +212,20 @@ if predict_btn:
 
     fig, ax = plt.subplots(figsize=(5, 5))
 
-    values = [probability, 1 - probability]
+    values = [
+        probability,
+        1 - probability
+    ]
 
-    labels = ["Survived", "Perished"]
+    labels = [
+        "Survived",
+        "Perished"
+    ]
 
-    colors = ["#10b981", "#ef4444"]
+    colors = [
+        "#10b981",
+        "#ef4444"
+    ]
 
     ax.pie(
         values,
@@ -215,9 +235,15 @@ if predict_btn:
         startangle=90
     )
 
-    centre_circle = plt.Circle((0,0),0.60,fc='white')
+    centre_circle = plt.Circle(
+        (0, 0),
+        0.60,
+        fc='white'
+    )
 
-    fig.gca().add_artist(centre_circle)
+    fig.gca().add_artist(
+        centre_circle
+    )
 
     ax.axis('equal')
 
@@ -225,33 +251,35 @@ if predict_btn:
 
     st.markdown(f"""
     <div class="summary-box">
-        <h2>📊 Model Summary</h2>
 
-        <p><b>Model Type:</b> Artificial Neural Network</p>
+    <h2>📊 Model Summary</h2>
 
-        <p><b>Architecture:</b> 3 Input Neurons → 2 Hidden Neurons → 1 Output Neuron</p>
+    <p><b>Model Type:</b> Artificial Neural Network</p>
 
-        <p><b>Activation Function:</b> Sigmoid</p>
+    <p><b>Architecture:</b> 3 Input Neurons → 2 Hidden Neurons → 1 Output Neuron</p>
 
-        <p><b>Training Accuracy:</b> {TRAIN_ACCURACY:.0%}</p>
+    <p><b>Activation Function:</b> Sigmoid</p>
 
-        <p><b>Validation Accuracy:</b> {VALIDATION_ACCURACY:.0%}</p>
+    <p><b>Training Accuracy:</b> {TRAIN_ACCURACY:.0%}</p>
 
-        <p><b>Loss:</b> {LOSS}</p>
+    <p><b>Validation Accuracy:</b> {VALIDATION_ACCURACY:.0%}</p>
 
-        <p>
-        The model predicts passenger survival probability
-        based on passenger class, age, and fare information.
-        Higher-class passengers with higher fares generally
-        show higher survival probability.
-        </p>
+    <p><b>Loss:</b> {LOSS}</p>
+
+    <p>
+    The model predicts passenger survival probability
+    using passenger class, age, and fare information.
+    Higher-class passengers with higher fares generally
+    have a higher chance of survival.
+    </p>
 
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("""
 <br><br>
+
 <center style='color:#94a3b8'>
-Titanic Survival Prediction System
+🚢 Titanic Survival Prediction System
 </center>
 """, unsafe_allow_html=True)
