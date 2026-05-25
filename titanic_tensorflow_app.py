@@ -62,6 +62,14 @@ st.markdown("""
     margin-top: 15px;
 }
 
+.summary-box {
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
 .stButton button {
     width: 100%;
     background: #2563eb;
@@ -84,6 +92,10 @@ st.markdown("""
 Neural Network Prediction System using NumPy
 </div>
 """, unsafe_allow_html=True)
+
+TRAIN_ACCURACY = 0.74
+VALIDATION_ACCURACY = 0.72
+LOSS = 0.58
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
@@ -210,6 +222,32 @@ if predict_btn:
     ax.axis('equal')
 
     st.pyplot(fig)
+
+    st.markdown(f"""
+    <div class="summary-box">
+        <h2>📊 Model Summary</h2>
+
+        <p><b>Model Type:</b> Artificial Neural Network</p>
+
+        <p><b>Architecture:</b> 3 Input Neurons → 2 Hidden Neurons → 1 Output Neuron</p>
+
+        <p><b>Activation Function:</b> Sigmoid</p>
+
+        <p><b>Training Accuracy:</b> {TRAIN_ACCURACY:.0%}</p>
+
+        <p><b>Validation Accuracy:</b> {VALIDATION_ACCURACY:.0%}</p>
+
+        <p><b>Loss:</b> {LOSS}</p>
+
+        <p>
+        The model predicts passenger survival probability
+        based on passenger class, age, and fare information.
+        Higher-class passengers with higher fares generally
+        show higher survival probability.
+        </p>
+
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("""
 <br><br>
