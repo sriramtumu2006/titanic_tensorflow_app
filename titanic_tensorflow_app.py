@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import joblib
 
-model = joblib.load("titanic_model.pkl")
+model = joblib.load("titanic_model.h5")
 
 st.set_page_config(page_title="Titanic Survival Prediction")
 
